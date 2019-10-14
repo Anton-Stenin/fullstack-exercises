@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 
 const DisplayTitle = ({ text }) => <h2>{text}</h2>
 
-const DisplayResults = ({ text, value }) => <div>{text} {value}</div>
+const Statistic = ({ text, value }) => <div>{text} {value}</div>
 
 const Button = ( {onClick, text} ) => 
         <button onClick={onClick}>
@@ -27,12 +27,12 @@ const Statistics = ({good, neutral, bad}) => {
 
     return (
         <>
-            <DisplayResults text='good' value={good}/>
-            <DisplayResults text='neutral' value={neutral}/>
-            <DisplayResults text='bad' value={bad}/>
-            <DisplayResults text='all' value={all}/>
-            <DisplayResults text='average' value={average}/>
-            <DisplayResults text='positive' value={positive}/>
+            <Statistic text='good' value={good}/>
+            <Statistic text='neutral' value={neutral}/>
+            <Statistic text='bad' value={bad}/>
+            <Statistic text='all' value={all}/>
+            <Statistic text='average' value={average}/>
+            <Statistic text='positive' value={positive}/>
         </>
     )
 }
