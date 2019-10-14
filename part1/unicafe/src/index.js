@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 
 const DisplayTitle = ({ text }) => <h2>{text}</h2>
 
-const DisplayResults = ({ text, value }) => <p>{text} {value}</p>
+const DisplayResults = ({ text, value }) => <div>{text} {value}</div>
 
 const Button = ( {onClick, text} ) => 
         <button onClick={onClick}>
@@ -12,6 +12,15 @@ const Button = ( {onClick, text} ) =>
         </button>
 
 const Statistics = ({good, neutral, bad}) => {
+
+    if (good === 0 && neutral === 0 && bad === 0 ) {
+        return (
+            <div>
+                No feedback given
+            </div>
+        )
+    }
+
     const all = good + bad + neutral;
     const average = (all === 0) ? 0 : (good - bad) / all;
     const positive = (all === 0) ? '' : (good * 100) / all + '%';
