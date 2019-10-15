@@ -11,14 +11,18 @@ const anecdotes = [
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 ]
 
+const Button = ({text, clickHandler}) => <button onClick={clickHandler}>{text}</button>
 
 const App = ( props ) => {
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState([0, 0, 0, 0, 0, 0])
 
-  const clickHandler = () => {
-    const number = Math.floor( Math.random() * anecdotes.length )
-    console.log( number )
-    setSelected( number );
+  const nextAnecdoteHandler = () => setSelected( Math.floor( Math.random() * anecdotes.length ) );
+
+  const voteHandler = () => {
+    const copy = [...votes]
+    copy[selected] += 1
+    setVotes(copy)
   }
 
   return (
@@ -26,9 +30,11 @@ const App = ( props ) => {
       <div>
         {props.anecdotes[selected]}
       </div>
-      <button onClick={clickHandler}>
-        next anecdote
-      </button>
+      <div>
+        has {votes[selected]} votes
+      </div>
+      <Button text="next anecdote" clickHandler={nextAnecdoteHandler} />
+      <Button text="vote" clickHandler={voteHandler} />
     </>
   )
 }
