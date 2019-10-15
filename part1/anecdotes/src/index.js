@@ -16,17 +16,31 @@ const Button = ({text, clickHandler}) => <button onClick={clickHandler}>{text}</
 const App = ( props ) => {
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState([0, 0, 0, 0, 0, 0])
+  const [topVoted, setTopVoted] = useState(0)
 
   const nextAnecdoteHandler = () => setSelected( Math.floor( Math.random() * anecdotes.length ) );
 
   const voteHandler = () => {
-    const copy = [...votes]
-    copy[selected] += 1
-    setVotes(copy)
+    const votesCopy = [...votes]
+    votesCopy[selected] += 1
+
+    let maxVotes = 0;
+    let topVoteIndex = 0;
+  
+    for (let i = 0; i < votesCopy.length; i ++) {
+      if (maxVotes < votesCopy[i] ) {
+        maxVotes = votesCopy[i]
+        topVoteIndex = i;
+      }
+    }
+    setVotes(votesCopy)
+    setTopVoted(topVoteIndex)
   }
+
 
   return (
     <>
+      <h2>Anecdote of the day</h2>
       <div>
         {props.anecdotes[selected]}
       </div>
@@ -35,6 +49,10 @@ const App = ( props ) => {
       </div>
       <Button text="next anecdote" clickHandler={nextAnecdoteHandler} />
       <Button text="vote" clickHandler={voteHandler} />
+      <h2>Anecdote with most votes</h2>
+      <div>
+        {props.anecdotes[topVoted]}
+      </div>
     </>
   )
 }
