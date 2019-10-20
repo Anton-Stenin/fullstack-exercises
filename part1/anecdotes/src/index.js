@@ -26,7 +26,7 @@ const App = ( props ) => {
 
     let maxVotes = 0;
     let topVoteIndex = 0;
-  
+    
     for (let i = 0; i < votesCopy.length; i ++) {
       if (maxVotes < votesCopy[i] ) {
         maxVotes = votesCopy[i]
