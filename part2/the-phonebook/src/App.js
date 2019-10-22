@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const Filter = (props) => {
-  console.log('filter props:', props)
-  
+  // console.log('filter props:', props)
+
   const value = props.value
   const onChangeHandler = props.onChangeHandler
-  
+
   return (
     <div>
       filter shown with <input value={value} onChange={onChangeHandler} />
@@ -24,7 +24,7 @@ const PersonForm = ({ onSubmit, newName, newNumber, handleNameChange, handleNumb
   )
 }
 
-const Person = ({person}) => {
+const Person = ({ person }) => {
   return (
     <li key={person.id}>{person.name} {person.number}</li>
   )
@@ -36,16 +36,25 @@ const Persons = ({ persons }) => {
 }
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '040-123456', id: 0 },
-    { name: 'Ada Lovelace', number: '39-44-5323523', id: 1 },
-    { name: 'Dan Abramov', number: '12-43-234345', id: 2 },
-    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 3 }
-
-  ])
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+
+
+  useEffect(() => {
+    console.log('effect')
+
+    axios
+      .get('http://localhost:3001/persons')
+      .then(responce => {
+        console.log('promise fulfilled')
+        setPersons(responce.data)
+      })
+      .catch( err => console.log('catched error: ', err) ) 
+  }, [])
+
+  console.log('render', persons.length, 'persons' )
 
   const personsToShow =
     (filter === '')
@@ -76,7 +85,7 @@ const App = () => {
 
     const personObject = {
       name: newName,
-      id: persons.length,
+      id: persons.length + 1,
       number: newNumber
     }
 
