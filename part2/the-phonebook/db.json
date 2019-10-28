@@ -12,18 +12,28 @@
     },
     {
       "name": "Dan Abramov",
-      "number": "12-43-234345",
+      "number": "",
       "id": 3
     },
     {
       "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
+      "number": "+8 675 - 234 -33",
       "id": 4
     },
     {
       "name": "Tanya Makhina",
       "number": "+7 995-0093-223-44",
       "id": 5
+    },
+    {
+      "name": "Anton Stenin",
+      "number": "+7 916 675 22 90",
+      "id": 6
+    },
+    {
+      "name": "Dirk Bekkemberg",
+      "number": "+7 916 11-22-333",
+      "id": 7
     }
   ]
 }
